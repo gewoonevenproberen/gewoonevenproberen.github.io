@@ -23,10 +23,10 @@
       --card-d:    #e4edff;
       --card-e:    #f5f7ff;
     }
- 
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
- 
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -35,7 +35,7 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
- 
+
     body::before {
       content: '';
       position: fixed;
@@ -48,7 +48,7 @@
       pointer-events: none;
       z-index: 0;
     }
- 
+
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
@@ -58,7 +58,7 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
- 
+
     .nav-logo {
       font-family: 'Instrument Serif', serif;
       font-size: 1.1rem;
@@ -66,15 +66,15 @@
       text-decoration: none;
       display: flex; align-items: center; gap: 0.6rem;
     }
- 
+
     .nav-logo-mark {
       width: 28px; height: 28px; border-radius: 8px;
       background: var(--accent);
       display: flex; align-items: center; justify-content: center;
     }
- 
+
     .nav-links { display: flex; align-items: center; gap: 0.15rem; list-style: none; }
- 
+
     .nav-links a {
       color: var(--muted); text-decoration: none;
       font-size: 0.875rem; font-weight: 500;
@@ -83,7 +83,7 @@
     }
     .nav-links a:hover { color: var(--accent); background: var(--soft); }
     .nav-links a.active { color: var(--accent); font-weight: 600; }
- 
+
     /* HERO */
     .hero {
       position: relative; z-index: 1;
@@ -92,12 +92,12 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 3rem; align-items: center;
     }
- 
+
     @media (max-width: 800px) {
       .hero { grid-template-columns: 1fr; padding-top: 4rem; }
       .hero-visual { display: none; }
     }
- 
+
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-size: 0.7rem; font-weight: 600;
@@ -108,7 +108,7 @@
       margin-bottom: 1.5rem;
       opacity: 0; animation: fadeUp 0.5s 0.1s ease forwards;
     }
- 
+
     .hero h1 {
       font-family: 'Instrument Serif', serif;
       font-size: clamp(2.6rem, 5vw, 4.2rem);
@@ -116,69 +116,60 @@
       color: var(--text); margin-bottom: 1.25rem;
       opacity: 0; animation: fadeUp 0.5s 0.2s ease forwards;
     }
- 
+
     .hero h1 em { font-style: italic; color: var(--accent); }
- 
+
     .hero-sub {
       font-size: 1rem; color: var(--muted);
       max-width: 440px; font-weight: 300; line-height: 1.75;
       opacity: 0; animation: fadeUp 0.5s 0.3s ease forwards;
     }
- 
-    /* blue orb illustration */
+
     .hero-visual {
-      position: relative; height: 280px;
       opacity: 0; animation: fadeUp 0.6s 0.35s ease forwards;
     }
- 
-    .orb {
-      position: absolute; border-radius: 50%;
-    }
-    .orb-1 {
-      width: 180px; height: 180px;
-      background: radial-gradient(circle at 38% 38%, #4f78e8, #1a3ba8);
-      top: 20px; left: 60px;
-      box-shadow: 0 24px 64px rgba(42,82,201,0.28);
-      animation: float1 6s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 110px; height: 110px;
-      background: radial-gradient(circle at 38% 38%, #7da4f5, #2a52c9);
-      top: 130px; left: 205px;
-      box-shadow: 0 12px 36px rgba(42,82,201,0.18);
-      animation: float2 7s ease-in-out infinite;
-    }
-    .orb-3 {
-      width: 65px; height: 65px;
-      background: radial-gradient(circle at 38% 38%, #b8ccff, #4f78e8);
-      top: 24px; left: 248px;
-      box-shadow: 0 8px 24px rgba(42,82,201,0.14);
-      animation: float3 5s ease-in-out infinite;
-    }
-    .orb-ring {
-      position: absolute; width: 220px; height: 220px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(42,82,201,0.12);
-      top: 0; left: 40px;
-      animation: float1 6s ease-in-out infinite;
-    }
- 
-    @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    @keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-    @keyframes float3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
- 
+
+    .hero-visual svg { width: 100%; height: auto; }
+
+    .net-float1 { animation: nf1 6s ease-in-out infinite; }
+    .net-float2 { animation: nf2 7s ease-in-out infinite; }
+    .net-float3 { animation: nf3 5s ease-in-out infinite; }
+    .net-float4 { animation: nf4 8s ease-in-out infinite; }
+    .net-float5 { animation: nf5 6.5s ease-in-out infinite; }
+    .net-float6 { animation: nf6 5.5s ease-in-out infinite; }
+    .net-halo   { animation: halo 3s ease-in-out infinite; }
+    .net-halo2  { animation: halo 3s 0.5s ease-in-out infinite; }
+    .net-halo3  { animation: halo 3s 1s ease-in-out infinite; }
+    .net-halo4  { animation: halo 3s 1.5s ease-in-out infinite; }
+    .net-halo5  { animation: halo 3s 2s ease-in-out infinite; }
+    .net-halo6  { animation: halo 3s 2.5s ease-in-out infinite; }
+    .net-edge   { animation: edgeFlow 4s ease-in-out infinite; stroke-dasharray: 6 4; }
+    .net-edge2  { animation: edgeFlow 4s 0.8s ease-in-out infinite; stroke-dasharray: 6 4; }
+    .net-edge3  { animation: edgeFlow 4s 1.6s ease-in-out infinite; stroke-dasharray: 6 4; }
+    .net-edge4  { animation: edgeFlow 4s 2.4s ease-in-out infinite; stroke-dasharray: 6 4; }
+    .net-edge5  { animation: edgeFlow 4s 3.2s ease-in-out infinite; stroke-dasharray: 6 4; }
+
+    @keyframes nf1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-5px,-9px)} }
+    @keyframes nf2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(7px,-13px)} }
+    @keyframes nf3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-4px,9px)} }
+    @keyframes nf4 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(9px,-7px)} }
+    @keyframes nf5 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-7px,11px)} }
+    @keyframes nf6 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(5px,-5px)} }
+    @keyframes halo { 0%,100%{opacity:0.1;r:32} 50%{opacity:0.2;r:38} }
+    @keyframes edgeFlow { 0%,100%{opacity:0.2;stroke-dashoffset:0} 50%{opacity:0.5;stroke-dashoffset:-20} }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
- 
+
     /* SECTION LABEL */
     .section-label {
       position: relative; z-index: 1;
       max-width: 1180px; margin: 0 auto;
       padding: 0 2.5rem 1.25rem;
     }
- 
+
     .section-tag {
       display: inline-block;
       font-size: 0.68rem; font-weight: 600;
@@ -188,7 +179,7 @@
       background: var(--soft);
       border-radius: 100px; padding: 0.28rem 0.85rem;
     }
- 
+
     /* BENTO */
     .bento {
       position: relative; z-index: 1;
@@ -197,7 +188,7 @@
       display: grid; grid-template-columns: repeat(12, 1fr);
       gap: 1rem;
     }
- 
+
     .bcard {
       background: var(--white);
       border: 1px solid var(--border);
@@ -209,41 +200,41 @@
       display: flex; flex-direction: column; justify-content: space-between;
       opacity: 0; animation: fadeUp 0.5s ease forwards;
     }
- 
+
     .bcard:hover {
       border-color: rgba(42,82,201,0.35);
       transform: translateY(-3px);
       box-shadow: 0 12px 40px rgba(42,82,201,0.08);
     }
- 
+
     .bcard-hero  { grid-column: span 7; grid-row: span 2; min-height: 360px; background: var(--card-b); animation-delay: 0.1s; }
     .bcard-tall  { grid-column: span 5; grid-row: span 2; min-height: 360px; background: var(--card-a); animation-delay: 0.15s; }
     .bcard-wide  { grid-column: span 5; min-height: 180px; background: var(--card-c); animation-delay: 0.2s; }
     .bcard-sm    { grid-column: span 4; min-height: 180px; background: var(--card-e); animation-delay: 0.25s; }
     .bcard-sm2   { grid-column: span 3; min-height: 180px; background: var(--card-d); animation-delay: 0.3s; }
     .bcard-full  { grid-column: span 12; background: var(--accent3); border-color: transparent; animation-delay: 0.35s; padding: 2rem 2.5rem; flex-direction: row; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
- 
+
     .bcard-full:hover { border-color: rgba(255,255,255,0.1); box-shadow: 0 12px 40px rgba(14,42,122,0.3); }
- 
+
     .bcard-hero::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, var(--accent), var(--accent2), transparent 70%);
     }
- 
+
     @media (max-width: 900px) {
       .bcard-hero, .bcard-tall, .bcard-wide,
       .bcard-sm, .bcard-sm2, .bcard-full { grid-column: span 12; }
       .bcard-full { flex-direction: column; align-items: flex-start; }
     }
- 
+
     .card-tag {
       font-size: 0.67rem; font-weight: 600;
       letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 0.85rem;
     }
- 
+
     .bcard-full .card-tag  { color: rgba(255,255,255,0.45); }
- 
+
     .card-number {
       font-family: 'Instrument Serif', serif;
       font-size: 6rem; font-weight: 400; line-height: 1;
@@ -251,7 +242,7 @@
       margin-bottom: 0.5rem; user-select: none;
     }
     .bcard-hero .card-number { font-size: 9rem; }
- 
+
     .card-title {
       font-family: 'Instrument Serif', serif;
       font-size: 1.45rem; font-weight: 400;
@@ -260,13 +251,13 @@
     }
     .bcard-hero .card-title { font-size: clamp(1.5rem, 2.5vw, 2rem); }
     .bcard-full .card-title { color: #fff; font-size: 1.2rem; margin-bottom: 0.2rem; }
- 
+
     .card-desc {
       font-size: 0.875rem; color: var(--muted);
       line-height: 1.65; flex-grow: 1; margin-bottom: 1.5rem;
     }
     .bcard-full .card-desc { color: rgba(255,255,255,0.45); margin-bottom: 0; }
- 
+
     .card-cta {
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-size: 0.82rem; font-weight: 600; color: var(--accent);
@@ -275,7 +266,7 @@
     .bcard:hover .card-cta { gap: 0.7rem; }
     .card-cta svg { transition: transform 0.2s; }
     .bcard:hover .card-cta svg { transform: translateX(3px); }
- 
+
     .pill {
       display: inline-flex; align-items: center; gap: 0.35rem;
       font-size: 0.7rem; font-weight: 500; color: var(--muted);
@@ -284,7 +275,7 @@
       border-radius: 100px; padding: 0.22rem 0.65rem;
       margin-bottom: 0.85rem;
     }
- 
+
     .badge {
       position: absolute; top: 1.25rem; right: 1.25rem;
       font-size: 0.62rem; font-weight: 700;
@@ -292,10 +283,10 @@
       color: #fff; background: var(--accent);
       border-radius: 100px; padding: 0.2rem 0.65rem;
     }
- 
+
     /* newsletter form */
     .nl-form { display: flex; gap: 0.65rem; flex-wrap: wrap; flex-shrink: 0; }
- 
+
     .nl-input {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.15);
@@ -306,7 +297,7 @@
     }
     .nl-input::placeholder { color: rgba(255,255,255,0.3); }
     .nl-input:focus { border-color: rgba(255,255,255,0.4); }
- 
+
     .nl-btn {
       background: #fff; color: var(--accent3);
       border: none; border-radius: 10px;
@@ -317,7 +308,7 @@
       transition: background 0.2s;
     }
     .nl-btn:hover { background: var(--soft2); }
- 
+
     /* ABOUT */
     .about-strip {
       position: relative; z-index: 1;
@@ -326,21 +317,21 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
     }
     @media (max-width: 700px) { .about-strip { grid-template-columns: 1fr; } }
- 
+
     .about-card {
       background: var(--white); border: 1px solid var(--border);
       border-radius: 20px; padding: 2rem;
       opacity: 0; animation: fadeUp 0.5s 0.45s ease forwards;
     }
     .about-card:nth-child(2) { animation-delay: 0.55s; }
- 
+
     .about-card h3 {
       font-family: 'Instrument Serif', serif;
       font-size: 1.25rem; font-weight: 400;
       color: var(--text); margin-bottom: 0.65rem;
     }
     .about-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
- 
+
     /* DIVIDER */
     .divider {
       position: relative; z-index: 1;
@@ -348,7 +339,7 @@
       padding: 0 2.5rem;
     }
     .divider hr { border: none; border-top: 1px solid var(--border); }
- 
+
     /* FOOTER */
     footer {
       position: relative; z-index: 1;
@@ -358,7 +349,7 @@
       font-size: 0.78rem; color: var(--muted);
     }
     footer a { color: var(--accent); text-decoration: none; }
- 
+
     @media (max-width: 600px) {
       nav, .hero, .bento, .section-label,
       .about-strip, .divider, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
@@ -367,7 +358,7 @@
   </style>
 </head>
 <body>
- 
+
 <nav>
   <a class="nav-logo" href="index.html">
     <div class="nav-logo-mark">
@@ -384,33 +375,86 @@
     <li><a href="about.html">About me</a></li>
   </ul>
 </nav>
- 
+
 <header class="hero">
   <div class="hero-text">
-    <div class="hero-eyebrow">Statistics· Data · Politics</div>
+    <div class="hero-eyebrow">Psychology · Data · Behaviour</div>
     <h1>Ideas worth<br><em>questioning.</em></h1>
     <p class="hero-sub">
-      Some writings, some research some blog posts.
+      A blog about how humans think, why we get things systematically wrong,
+      and what the data actually says.
     </p>
   </div>
   <div class="hero-visual">
-    <div class="orb-ring"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ng1" cx="38%" cy="35%" r="60%"><stop offset="0%" stop-color="#7da4f5"/><stop offset="100%" stop-color="#1a3ba8"/></radialGradient>
+        <radialGradient id="ng2" cx="38%" cy="35%" r="60%"><stop offset="0%" stop-color="#92b6f7"/><stop offset="100%" stop-color="#2a52c9"/></radialGradient>
+        <radialGradient id="ng3" cx="38%" cy="35%" r="60%"><stop offset="0%" stop-color="#6b9bf2"/><stop offset="100%" stop-color="#1832a0"/></radialGradient>
+        <radialGradient id="ng4" cx="38%" cy="35%" r="60%"><stop offset="0%" stop-color="#a8c4fa"/><stop offset="100%" stop-color="#3460d8"/></radialGradient>
+        <radialGradient id="ng5" cx="38%" cy="35%" r="60%"><stop offset="0%" stop-color="#5a8eef"/><stop offset="100%" stop-color="#0e2a7a"/></radialGradient>
+        <radialGradient id="ng6" cx="38%" cy="35%" r="60%"><stop offset="0%" stop-color="#84aef4"/><stop offset="100%" stop-color="#2244b8"/></radialGradient>
+      </defs>
+      <!-- edges -->
+      <line x1="95" y1="80"  x2="200" y2="45" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge"/>
+      <line x1="200" y1="45" x2="300" y2="95" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge2"/>
+      <line x1="95" y1="80"  x2="80"  y2="200" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge3"/>
+      <line x1="200" y1="45" x2="210" y2="230" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge4"/>
+      <line x1="300" y1="95" x2="310" y2="185" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge5"/>
+      <line x1="80"  y1="200" x2="210" y2="230" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge"/>
+      <line x1="210" y1="230" x2="310" y2="185" stroke="#2a52c9" stroke-width="1" fill="none" class="net-edge2"/>
+      <line x1="95"  y1="80"  x2="210" y2="230" stroke="#4f78e8" stroke-width="0.7" fill="none" class="net-edge3" opacity="0.3"/>
+      <line x1="300" y1="95"  x2="80"  y2="200" stroke="#4f78e8" stroke-width="0.7" fill="none" class="net-edge4" opacity="0.3"/>
+      <!-- node 1 -->
+      <g class="net-float1" style="transform-origin:95px 80px">
+        <circle cx="95" cy="80" r="28" fill="#2a52c9" opacity="0.08" class="net-halo"/>
+        <circle cx="95" cy="80" r="20" fill="url(#ng1)"/>
+        <circle cx="95" cy="80" r="20" fill="none" stroke="#4f78e8" stroke-width="0.8"/>
+      </g>
+      <!-- node 2 -->
+      <g class="net-float2" style="transform-origin:200px 45px">
+        <circle cx="200" cy="45" r="22" fill="#2a52c9" opacity="0.08" class="net-halo2"/>
+        <circle cx="200" cy="45" r="15" fill="url(#ng2)"/>
+        <circle cx="200" cy="45" r="15" fill="none" stroke="#4f78e8" stroke-width="0.8"/>
+      </g>
+      <!-- node 3 -->
+      <g class="net-float3" style="transform-origin:300px 95px">
+        <circle cx="300" cy="95" r="24" fill="#2a52c9" opacity="0.08" class="net-halo3"/>
+        <circle cx="300" cy="95" r="17" fill="url(#ng3)"/>
+        <circle cx="300" cy="95" r="17" fill="none" stroke="#4f78e8" stroke-width="0.8"/>
+      </g>
+      <!-- node 4 -->
+      <g class="net-float4" style="transform-origin:80px 200px">
+        <circle cx="80" cy="200" r="18" fill="#2a52c9" opacity="0.08" class="net-halo4"/>
+        <circle cx="80" cy="200" r="12" fill="url(#ng4)"/>
+        <circle cx="80" cy="200" r="12" fill="none" stroke="#4f78e8" stroke-width="0.8"/>
+      </g>
+      <!-- node 5 — largest -->
+      <g class="net-float5" style="transform-origin:210px 230px">
+        <circle cx="210" cy="230" r="30" fill="#2a52c9" opacity="0.08" class="net-halo5"/>
+        <circle cx="210" cy="230" r="22" fill="url(#ng5)"/>
+        <circle cx="210" cy="230" r="22" fill="none" stroke="#4f78e8" stroke-width="0.8"/>
+      </g>
+      <!-- node 6 -->
+      <g class="net-float6" style="transform-origin:310px 185px">
+        <circle cx="310" cy="185" r="20" fill="#2a52c9" opacity="0.08" class="net-halo6"/>
+        <circle cx="310" cy="185" r="14" fill="url(#ng6)"/>
+        <circle cx="310" cy="185" r="14" fill="none" stroke="#4f78e8" stroke-width="0.8"/>
+      </g>
+    </svg>
   </div>
 </header>
- 
+
 <div class="section-label">
   <span class="section-tag">Latest posts</span>
 </div>
- 
+
 <main class="bento">
- 
+
   <a href="post-estimation.html" class="bcard bcard-hero">
     <div class="badge">New</div>
     <div>
-      <div class="card-tag">  · Estimation</div>
+      <div class="card-tag">Psychology · Estimation</div>
       <div class="card-number">01</div>
     </div>
     <div>
@@ -421,9 +465,10 @@
         </svg>
         8 min · Interactive
       </div>
-      <div class="card-title">The German Tank Problem</div>
+      <div class="card-title">Why your brain always gets the number wrong</div>
       <div class="card-desc">
-        A triumph of statistics over intuition.
+        We are wired to overestimate. This is not a flaw — it's a feature.
+        Put your intuition to the test against a simple formula and see the gap for yourself.
       </div>
       <div class="card-cta">
         Read article
@@ -433,7 +478,7 @@
       </div>
     </div>
   </a>
- 
+
   <div class="bcard bcard-tall">
     <div>
       <div class="card-tag">Coming soon</div>
@@ -449,7 +494,7 @@
       <div class="card-cta" style="color:var(--muted);pointer-events:none;">Coming soon</div>
     </div>
   </div>
- 
+
   <div class="bcard bcard-wide">
     <div>
       <div class="card-tag">Coming soon</div>
@@ -461,7 +506,7 @@
       <div class="card-desc">The Dunning-Kruger effect, visualised with real data.</div>
     </div>
   </div>
- 
+
   <div class="bcard bcard-sm">
     <div>
       <div class="card-tag">Coming soon</div>
@@ -472,7 +517,7 @@
       <div class="card-desc">Why we can't let go — and the hidden cost of holding on.</div>
     </div>
   </div>
- 
+
   <div class="bcard bcard-sm2">
     <div>
       <div class="card-tag">Coming soon</div>
@@ -483,7 +528,7 @@
       <div class="card-desc">The first number you hear changes everything after it.</div>
     </div>
   </div>
- 
+
   <div class="bcard bcard-full">
     <div>
       <div class="card-tag">Stay curious</div>
@@ -495,11 +540,11 @@
       <button class="nl-btn">Subscribe →</button>
     </div>
   </div>
- 
+
 </main>
- 
+
 <div class="divider"><hr></div>
- 
+
 <section class="about-strip">
   <div class="about-card">
     <h3>About this blog</h3>
@@ -517,11 +562,11 @@
     </p>
   </div>
 </section>
- 
+
 <footer>
   <span>© 2026 Gewoon Even Proberen</span>
   <span>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></span>
 </footer>
- 
+
 </body>
 </html>
