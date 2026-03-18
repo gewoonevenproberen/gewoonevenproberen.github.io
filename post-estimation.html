@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why your brain always gets the number wrong — Gewoon Even Proberen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #f4f6fb;
+      --white:   #ffffff;
+      --border:  #dde3f0;
+      --accent:  #2a52c9;
+      --accent2: #4f78e8;
+      --accent3: #0e2a7a;
+      --text:    #0f1728;
+      --muted:   #6b7a99;
+      --soft:    #e8edf8;
+      --soft2:   #dde6f8;
+    }
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+ 
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+ 
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+      background: rgba(244,246,251,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem; color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+ 
+    .nav-logo-mark {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+ 
+    .nav-links { display: flex; align-items: center; gap: 0.15rem; list-style: none; }
+ 
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      padding: 0.45rem 0.9rem; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); background: var(--soft); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+ 
+    /* ARTICLE LAYOUT */
+    .article-wrap {
+      position: relative; z-index: 1;
+      max-width: 720px; margin: 0 auto;
+      padding: 5rem 2rem 8rem;
+    }
+ 
+    /* HEADER */
+    .post-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); background: var(--soft2);
+      border: 1px solid rgba(42,82,201,0.2);
+      border-radius: 100px; padding: 0.3rem 0.9rem;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.5s 0.1s ease forwards;
+    }
+ 
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 1.25rem;
+      opacity: 0; animation: fadeUp 0.5s 0.2s ease forwards;
+    }
+ 
+    h1 em { font-style: italic; color: var(--accent); }
+ 
+    .post-meta {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.8rem; color: var(--muted);
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+      opacity: 0; animation: fadeUp 0.5s 0.3s ease forwards;
+    }
+ 
+    .post-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .meta-dot { color: var(--border); }
+ 
+    /* BODY TEXT */
+    .post-body h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.6rem; font-weight: 400;
+      letter-spacing: -0.01em; color: var(--text);
+      margin: 3rem 0 1rem;
+    }
+ 
+    .post-body p { color: #3a4560; margin-bottom: 1.25rem; }
+ 
+    .post-body strong { color: var(--text); font-weight: 600; }
+ 
+    .pullquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.5rem;
+      background: var(--soft2);
+      border-radius: 0 12px 12px 0;
+      margin: 2rem 0;
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: var(--accent3); line-height: 1.6;
+    }
+ 
+    /* CARDS */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      margin: 2.5rem 0; position: relative; overflow: hidden;
+    }
+ 
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), transparent 70%);
+    }
+ 
+    .card-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem; font-weight: 400; color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+ 
+    .card-desc { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.5rem; }
+ 
+    /* GUESS INPUT */
+    .guess-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+ 
+    .guess-input {
+      flex: 1; min-width: 160px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.8rem 1.1rem;
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem; font-weight: 400;
+      color: var(--text); outline: none;
+      transition: border-color 0.2s;
+    }
+    .guess-input:focus { border-color: var(--accent); }
+    .guess-input::placeholder { color: var(--border); }
+ 
+    .btn {
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 10px;
+      padding: 0.8rem 1.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .btn:hover { background: #1e3da8; }
+    .btn:active { transform: scale(0.97); }
+    .btn:disabled { background: var(--border); color: var(--muted); cursor: default; }
+ 
+    .saved-msg {
+      display: none; align-items: center; gap: 0.5rem;
+      margin-top: 1rem; font-size: 0.82rem; color: var(--accent);
+    }
+    .saved-msg.show { display: flex; }
+ 
+    /* FORMULA */
+    .formula-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0; text-align: center;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      color: var(--muted);
+    }
+ 
+    .formula-box .fv { color: var(--accent); font-weight: 600; }
+ 
+    .formula-result {
+      display: block;
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem; font-weight: 400;
+      color: var(--accent3); margin-top: 0.5rem;
+    }
+ 
+    .sliders { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0; }
+ 
+    .slider-row label {
+      display: flex; justify-content: space-between;
+      font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem;
+    }
+ 
+    .slider-row label span {
+      font-weight: 600; color: var(--accent);
+    }
+ 
+    input[type=range] {
+      width: 100%; accent-color: var(--accent);
+      cursor: pointer;
+    }
+ 
+    /* COMPARISON */
+    .comparison {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 0.75rem; margin: 2rem 0;
+    }
+ 
+    @media (max-width: 560px) { .comparison { grid-template-columns: 1fr; } }
+ 
+    .comp-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.25rem;
+      text-align: center;
+    }
+ 
+    .comp-label {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.6rem;
+    }
+ 
+    .comp-number {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem; font-weight: 400;
+    }
+ 
+    .comp-card.you .comp-number    { color: var(--muted); }
+    .comp-card.formula .comp-number { color: var(--accent2); }
+    .comp-card.real .comp-number   { color: var(--accent3); }
+ 
+    .comp-bar {
+      height: 3px; background: var(--border);
+      border-radius: 2px; margin-top: 0.75rem; overflow: hidden;
+    }
+ 
+    .comp-bar-fill {
+      height: 100%; border-radius: 2px;
+      width: 0%; transition: width 1s cubic-bezier(0.4,0,0.2,1);
+    }
+ 
+    .comp-card.you .comp-bar-fill    { background: var(--muted); }
+    .comp-card.formula .comp-bar-fill { background: var(--accent2); }
+    .comp-card.real .comp-bar-fill   { background: var(--accent3); }
+ 
+    .comp-diff { font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; }
+ 
+    #reveal-btn { display: block; margin: 0 auto 1.5rem; }
+ 
+    .conclusion {
+      background: var(--soft2);
+      border: 1px solid rgba(42,82,201,0.15);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      font-size: 0.9rem; color: var(--accent3);
+      line-height: 1.7; display: none;
+    }
+ 
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--accent); text-decoration: none;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.5s 0.05s ease forwards;
+    }
+    .back-link:hover { text-decoration: underline; }
+ 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+ 
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .article-wrap { padding: 3rem 1.25rem 6rem; }
+    }
+  </style>
+</head>
+<body>
+ 
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-mark">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="white" stroke-width="1.5"/>
+        <path d="M7 4v3l2 1.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    Gewoon Even Proberen
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Blog</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html">About me</a></li>
+  </ul>
+</nav>
+ 
+<div class="article-wrap">
+ 
+  <a class="back-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to all posts
+  </a>
+ 
+  <div class="post-eyebrow">Psychology · Estimation</div>
+ 
+  <h1>Why your brain always gets the <em>number</em> wrong</h1>
+ 
+  <div class="post-meta">
+    <span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M6 3.5v2.5l1.5 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      8 min read
+    </span>
+    <span class="meta-dot">·</span>
+    <span>Interactive</span>
+    <span class="meta-dot">·</span>
+    <span>March 2026</span>
+  </div>
+ 
+  <div class="post-body">
+ 
+    <h2>The setup</h2>
+    <p>
+      Every day, humans make estimates. How long will this take? How many people were there?
+      How much does that cost? We're constantly converting the vague and unknown into a working
+      number — and almost universally, we get it wrong in the same direction: <strong>too high</strong>.
+    </p>
+    <p>
+      This isn't random error. It's systematic. Psychologists have studied it for decades across
+      cultures, professions, and contexts. The phenomenon appears in project planning, medical
+      diagnosis, financial forecasting, and even something as simple as estimating how many
+      items are in a jar.
+    </p>
+ 
+    <div class="pullquote">
+      "The first step to thinking clearly is admitting that your gut is a terrible statistician."
+    </div>
+ 
+    <p>
+      In this essay, we'll put your intuition to the test — then show you a simple statistical
+      method that systematically outperforms human estimation. The gap between the two might surprise you.
+    </p>
+ 
+    <!-- §2 GUESS -->
+    <h2>Your turn — before we go any further</h2>
+    <p>
+      Before you read any more context, we want to capture your raw, uninfluenced intuition.
+      No pressure. No wrong answer. Just your honest first guess.
+    </p>
+    <p>
+      <strong>The question:</strong> In a typical European city of 500,000 people, how many
+      daily bicycle trips are taken on an average weekday?
+    </p>
+ 
+    <div class="card">
+      <div class="card-title">What's your gut feeling?</div>
+      <div class="card-desc">Enter a number — your instinctive estimate before reading further.</div>
+      <div class="guess-row">
+        <input class="guess-input" id="user-guess" type="number" min="0" placeholder="e.g. 50000"/>
+        <button class="btn" id="save-btn" onclick="saveGuess()">Lock it in →</button>
+      </div>
+      <div class="saved-msg" id="saved-msg">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M4.5 7l2 2 3-3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Saved! We'll show this again at the end.
+      </div>
+    </div>
+ 
+    <!-- §3 FORMULA -->
+    <h2>Why statistics beats intuition</h2>
+    <p>
+      Our brains use heuristics — mental shortcuts — to produce estimates quickly.
+      The problem is these shortcuts are calibrated for ancestral environments, not for large
+      numbers or complex systems. When we try to estimate things beyond our direct experience,
+      we anchor on the wrong reference points and scale poorly.
+    </p>
+    <p>
+      A simple <strong>base-rate decomposition</strong> — also called a Fermi estimation —
+      outperforms expert intuition in dozens of documented studies. The idea: break any unknown
+      into observable components, estimate each independently, then multiply.
+    </p>
+ 
+    <div class="formula-box">
+      Daily trips =
+      <span class="fv">Population</span> ×
+      <span class="fv">% who cycle</span> ×
+      <span class="fv">avg trips/day</span>
+      <span class="formula-result" id="formula-out">—</span>
+    </div>
+ 
+    <p>Adjust the sliders below and watch the estimate update in real time:</p>
+ 
+    <div class="card" style="margin-top:0;">
+      <div class="sliders">
+        <div class="slider-row">
+          <label>% of population who cycle regularly <span id="pct-lbl">18%</span></label>
+          <input type="range" min="1" max="60" value="18" id="pct-sl" oninput="updateFormula()">
+        </div>
+        <div class="slider-row">
+          <label>Average trips per cyclist per day <span id="trips-lbl">1.4</span></label>
+          <input type="range" min="1" max="40" value="14" id="trips-sl" oninput="updateFormula()">
+        </div>
+        <div class="slider-row">
+          <label>City population (thousands) <span id="pop-lbl">500k</span></label>
+          <input type="range" min="100" max="2000" value="500" id="pop-sl" oninput="updateFormula()">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- §4 CONTEXT -->
+    <h2>What's actually happening in your brain</h2>
+    <p>
+      When you made your guess above, you likely did one of two things: you either pictured
+      a scene — a busy street, cyclists passing — and extrapolated from that image. Or you
+      anchored on a number you'd heard before and adjusted slightly.
+    </p>
+    <p>
+      Both strategies suffer from the same flaw: they rely on <em>availability</em>, not base
+      rates. Your estimate reflects what's vivid and memorable, not what's statistically
+      representative. People who live near a bike lane overestimate cycling rates. People who
+      rarely see cyclists underestimate.
+    </p>
+    <p>
+      The Fermi method forces you to leave your subjective frame of reference and work from
+      population-level numbers. Each variable is smaller and more tractable. The errors in
+      each component partially cancel out. The result is reliably closer to truth.
+    </p>
+ 
+    <!-- §5 COMPARISON -->
+    <h2>The moment of truth</h2>
+    <p>
+      Let's compare all three numbers: your gut feeling, the formula's estimate, and the
+      real answer from transport research data.
+    </p>
+ 
+    <button class="btn" id="reveal-btn" onclick="revealComparison()">Reveal the real number →</button>
+ 
+    <div class="comparison">
+      <div class="comp-card you">
+        <div class="comp-label">Your guess</div>
+        <div class="comp-number" id="your-num">—</div>
+        <div class="comp-bar"><div class="comp-bar-fill" id="your-bar"></div></div>
+        <div class="comp-diff" id="your-diff"></div>
+      </div>
+      <div class="comp-card formula">
+        <div class="comp-label">Formula</div>
+        <div class="comp-number" id="formula-num">—</div>
+        <div class="comp-bar"><div class="comp-bar-fill" id="formula-bar"></div></div>
+        <div class="comp-diff" id="formula-diff"></div>
+      </div>
+      <div class="comp-card real">
+        <div class="comp-label">Real answer</div>
+        <div class="comp-number" id="real-num">—</div>
+        <div class="comp-bar"><div class="comp-bar-fill" id="real-bar"></div></div>
+        <div class="comp-diff">Ground truth</div>
+      </div>
+    </div>
+ 
+    <div class="conclusion" id="conclusion">
+      The gap between your intuition and the formula illustrates exactly what decades of
+      cognitive research confirms: unstructured human estimation is noisy, biased, and
+      overconfident. The fix isn't intelligence — it's method.
+    </div>
+ 
+  </div>
+</div>
+ 
+<script>
+  const REAL = 126000;
+ 
+  function saveGuess() {
+    const val = document.getElementById('user-guess').value;
+    if (!val || isNaN(val) || Number(val) <= 0) return;
+    sessionStorage.setItem('userGuess', val);
+    document.getElementById('saved-msg').classList.add('show');
+    document.getElementById('save-btn').disabled = true;
+    document.getElementById('save-btn').textContent = 'Saved ✓';
+    updateFormula();
+  }
+ 
+  function updateFormula() {
+    const pct   = document.getElementById('pct-sl').value;
+    const trips = document.getElementById('trips-sl').value / 10;
+    const pop   = document.getElementById('pop-sl').value * 1000;
+ 
+    document.getElementById('pct-lbl').textContent   = pct + '%';
+    document.getElementById('trips-lbl').textContent = trips.toFixed(1);
+    document.getElementById('pop-lbl').textContent   = (pop/1000).toFixed(0) + 'k';
+ 
+    const result = Math.round(pop * (pct / 100) * trips);
+    document.getElementById('formula-out').textContent = result.toLocaleString();
+    sessionStorage.setItem('formulaEstimate', result);
+  }
+ 
+  function revealComparison() {
+    const guess   = parseInt(sessionStorage.getItem('userGuess')) || 0;
+    const formula = parseInt(sessionStorage.getItem('formulaEstimate')) || REAL;
+    const maxVal  = Math.max(guess, formula, REAL, 1);
+ 
+    document.getElementById('your-num').textContent    = guess ? guess.toLocaleString() : 'No guess';
+    document.getElementById('formula-num').textContent = formula.toLocaleString();
+    document.getElementById('real-num').textContent    = REAL.toLocaleString();
+ 
+    setTimeout(() => {
+      document.getElementById('your-bar').style.width    = (guess / maxVal * 100) + '%';
+      document.getElementById('formula-bar').style.width = (formula / maxVal * 100) + '%';
+      document.getElementById('real-bar').style.width    = '100%';
+    }, 100);
+ 
+    if (guess) {
+      const guessOff   = Math.round(Math.abs(guess - REAL) / REAL * 100);
+      const formulaOff = Math.round(Math.abs(formula - REAL) / REAL * 100);
+      document.getElementById('your-diff').textContent    = guessOff + '% off';
+      document.getElementById('formula-diff').textContent = formulaOff + '% off';
+    }
+ 
+    document.getElementById('reveal-btn').style.display = 'none';
+    document.getElementById('conclusion').style.display = 'block';
+  }
+ 
+  updateFormula();
+</script>
+</body>
+</html>
